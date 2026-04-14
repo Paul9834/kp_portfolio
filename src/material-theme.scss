@@ -1,0 +1,88 @@
+// ============================================================
+//  material-theme.scss
+//  Angular Material 3 · Nature UI · Poppins · Portfolio
+// ============================================================
+
+@use '@angular/material' as mat;
+
+@include mat.elevation-classes();
+@include mat.app-background();
+
+// ── Tema M3 (paletas válidas de M3) ───────────────────────
+html {
+  color-scheme: light;
+
+  @include mat.theme((
+    color: (
+      primary:  mat.$green-palette,   // Verde bosque ✅
+      tertiary: mat.$cyan-palette,    // Cyan (teal M3) ✅
+    ),
+    typography: Poppins,
+    density: 0,
+  ));
+}
+
+// ── Override tokens para ajustar al verde #1B5E20 exacto ──
+html {
+  // Primario
+  --mat-sys-primary:              #1B5E20;
+  --mat-sys-on-primary:           #FFFFFF;
+  --mat-sys-primary-container:    #C8E6C9;
+  --mat-sys-on-primary-container: #003909;
+
+  // Secundario
+  --mat-sys-secondary:            #2E7D32;
+  --mat-sys-on-secondary:         #FFFFFF;
+  --mat-sys-secondary-container:  #E8F5E9;
+  --mat-sys-on-secondary-container: #0A3D0A;
+
+  // Terciario (teal)
+  --mat-sys-tertiary:             #00695C;
+  --mat-sys-on-tertiary:          #FFFFFF;
+  --mat-sys-tertiary-container:   #B2DFDB;
+  --mat-sys-on-tertiary-container: #003731;
+
+  // Superficies
+  --mat-sys-surface:              #F5F7F6;
+  --mat-sys-surface-variant:      #E0E8E1;
+  --mat-sys-on-surface:           #1A1C19;
+  --mat-sys-on-surface-variant:   #444744;
+  --mat-sys-background:           #F5F7F6;
+  --mat-sys-on-background:        #1A1C19;
+
+  // Error y outline
+  --mat-sys-error:                #B00020;
+  --mat-sys-on-error:             #FFFFFF;
+  --mat-sys-outline:              #737873;
+  --mat-sys-outline-variant:      #C2C9C2;
+
+  // Tipografía Poppins en todos los tokens de texto M3
+  --mat-sys-body-large-font:       'Poppins', sans-serif;
+  --mat-sys-body-medium-font:      'Poppins', sans-serif;
+  --mat-sys-body-small-font:       'Poppins', sans-serif;
+  --mat-sys-label-large-font:      'Poppins', sans-serif;
+  --mat-sys-label-medium-font:     'Poppins', sans-serif;
+  --mat-sys-label-small-font:      'Poppins', sans-serif;
+  --mat-sys-title-large-font:      'Poppins', sans-serif;
+  --mat-sys-title-medium-font:     'Poppins', sans-serif;
+  --mat-sys-title-small-font:      'Poppins', sans-serif;
+  --mat-sys-headline-large-font:   'Poppins', sans-serif;
+  --mat-sys-headline-medium-font:  'Poppins', sans-serif;
+  --mat-sys-headline-small-font:   'Poppins', sans-serif;
+  --mat-sys-display-large-font:    'Poppins', sans-serif;
+  --mat-sys-display-medium-font:   'Poppins', sans-serif;
+  --mat-sys-display-small-font:    'Poppins', sans-serif;
+
+  // Pesos semibold en títulos
+  --mat-sys-title-large-weight:     600;
+  --mat-sys-headline-large-weight:  700;
+  --mat-sys-headline-medium-weight: 700;
+
+  // Shapes redondeados (estilo portfolio)
+  --mat-sys-corner-extra-small:    8px;
+  --mat-sys-corner-small:          10px;
+  --mat-sys-corner-medium:         12px;
+  --mat-sys-corner-large:          20px;
+  --mat-sys-corner-extra-large:    28px;
+  --mat-sys-corner-full:           9999px;
+}
