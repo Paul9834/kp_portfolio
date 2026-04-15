@@ -1,9 +1,20 @@
 <nav class="navbar">
 
-  <div class="nav-links">
+  <div class="nav-links desktop-only">
     <a href="#about">About</a>
     <a href="#projects">Projects</a>
     <a href="#contact">Contact</a>
+  </div>
+
+  <div class="mobile-only">
+    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Menu">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <a mat-menu-item href="#about">About</a>
+      <a mat-menu-item href="#projects">Projects</a>
+      <a mat-menu-item href="#contact">Contact</a>
+    </mat-menu>
   </div>
 
   <div class="nav-actions">
