@@ -205,8 +205,8 @@
 .flag-counter {
   display: flex;
   justify-content: center;
-  padding: 64px 0 8px;
-  opacity: 0.3;
+  padding: 84px 0 8px;
+  opacity: 0.2;
 }
 
 /* Definición de la animación */
