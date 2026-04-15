@@ -120,7 +120,7 @@
     top: -20%; right: -5%;
     width: 50%; height: 130%;
     background: var(--grad-blob);
-    border-radius: 30% 0 0 30%;
+    border-radius: 65% 0 0 30%;
     opacity: 1;
   }
 }
