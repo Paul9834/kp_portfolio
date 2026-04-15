@@ -1,27 +1,5 @@
-.coming-soon {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  font-family: 'Poppins', sans-serif;
-  background: #F5F7F6;
-  color: #1A1C19;
-}
-
-.logo-box {
-  font-size: 3rem;
-}
-
-h1 {
-  font-size: 2.5rem;
-  font-weight: 800;
-}
-
-.accent { color: #1B5E20; }
-
-p {
-  color: #6B726C;
-  font-size: 1rem;
+/* Solo el shell — los estilos globales van en styles.css */
+main {
+  display: block;
+  overflow-x: hidden;
 }

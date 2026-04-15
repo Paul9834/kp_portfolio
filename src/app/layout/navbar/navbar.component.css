@@ -1,0 +1,123 @@
+/* ============================================================
+   navbar.component.css
+   All values use CSS custom properties from styles.css.
+   No hardcoded colors, fonts, radii or transitions.
+   ============================================================ */
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-inline: 24px;
+  height: var(--nav-height);          /* token — stays in sync with hero padding-top */
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+/* ── Logo ──────────────────────────────────────────────────── */
+.nav-logo {
+  font-family: var(--font-main);
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--text-primary);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color var(--transition);
+}
+
+.nav-logo:hover { color: var(--green-800); }
+
+/* ── Nav links ─────────────────────────────────────────────── */
+.nav-links {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.nav-links a {
+  font-family: var(--font-main);
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  transition: background var(--transition), color var(--transition);
+}
+
+.nav-links a:hover {
+  background: var(--surface-2);
+  color: var(--text-primary);
+}
+
+/* ── Actions (GitHub / LinkedIn) ───────────────────────────── */
+.nav-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.btn-github,
+.btn-linkedin {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-main);
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: all var(--transition);
+}
+
+/* GitHub — uses portfolio dark tone */
+.btn-github {
+  background: var(--text-primary);
+  color: var(--text-inverse);
+}
+
+.btn-github:hover {
+  background: var(--text-secondary);
+}
+
+/* LinkedIn — brand color is intentionally kept hardcoded */
+.btn-linkedin {
+  background: #0077b5;
+  color: #ffffff;
+}
+
+.btn-linkedin:hover {
+  background: #005fa3;
+}
+
+/* ── Mobile ────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .navbar {
+    padding-inline: 16px;
+    /* height auto-updates via responsive --nav-height token in styles.css */
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .nav-actions { gap: 6px; }
+
+  .btn-github,
+  .btn-linkedin {
+    padding: 8px 10px;
+    font-size: 0.78rem;
+    border-radius: var(--radius-lg);
+  }
+
+  /* Show icon only on mobile — hide text label */
+  .btn-github span,
+  .btn-linkedin span { display: none; }
+}

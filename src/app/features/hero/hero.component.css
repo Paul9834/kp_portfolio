@@ -1,0 +1,216 @@
+/* ============================================================
+   hero.component.css — Layout del Hero
+   Sin colores hardcoded, todo usa var() de styles.css
+   ============================================================ */
+
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: var(--nav-height);
+  background: var(--bg);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Blob decorativo — desktop: columna derecha / mobile: cap superior */
+.hero::before {
+  content: '';
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+
+  /* Mobile first: soft green cap at the top */
+  top: 0; right: 0;
+  width: 100%; height: 35%;
+  background: linear-gradient(to bottom, var(--green-50) 0%, transparent 100%);
+  border-radius: 0;
+  opacity: 0.7;
+}
+
+/* Desktop: decorative blob behind the card column */
+@media (min-width: 992px) {
+  .hero::before {
+    top: -20%; right: -8%;
+    width: 55%; height: 130%;
+    background: linear-gradient(to bottom left, var(--green-50) 0%, var(--green-100) 100%);
+    border-radius: 40% 0 0 40%;
+    opacity: 0.85;
+  }
+}
+
+/* ── Grid principal ──────────────────────────────────────── */
+.hero-content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: clamp(100px, 12vw, 140px) 24px clamp(60px, 8vw, 80px);
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: center;
+  gap: 48px;
+}
+
+@media (min-width: 768px)  { .hero-content { padding-inline: 40px; } }
+@media (min-width: 992px)  {
+  .hero-content {
+    grid-template-columns: 1fr 420px;
+    padding-inline: 48px;
+    gap: 64px;
+  }
+}
+
+/* ── Columna texto ───────────────────────────────────────── */
+.text-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+/* .badge-tag viene de styles.css */
+
+.text-col h1 {
+  font-size: clamp(2.6rem, 5.5vw, 5rem);
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1.05;
+  margin: 0;
+}
+
+/* .gradient-text viene de styles.css */
+
+.subtitle {
+  font-size: clamp(1rem, 1.6vw, 1.2rem);
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.desc {
+  font-size: clamp(0.9rem, 1.2vw, 1rem);
+  color: var(--text-muted);
+  line-height: 1.8;
+  max-width: 480px;
+  margin: 0;
+}
+
+/* .btn-primary y .btn-secondary vienen de styles.css */
+.hero-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+/* Flag counter — flows below the grid, centered */
+.flag-counter {
+  display: flex;
+  justify-content: center;
+  padding: 24px 0 8px;
+  opacity: 0.5;
+  transition: opacity var(--transition);
+}
+.flag-counter:hover { opacity: 1; }
+
+/* ── Columna card ────────────────────────────────────────── */
+.card-col { width: 100%; }
+
+/* mat-card overrides — beat Material M3 defaults with portfolio tokens */
+.stack-card {
+  border-radius: var(--radius-xl) !important;
+  box-shadow: var(--shadow-lg) !important;
+  background: var(--surface) !important;
+  border: 1px solid rgba(0,0,0,0.05) !important;
+  padding: 0 !important;
+  /*
+   * CSS custom properties inherit through the DOM tree, bypassing Angular's
+   * view encapsulation boundary. Setting --mat-divider-color here makes
+   * mat-divider inside this card pick it up automatically.
+   */
+  --mat-divider-color: var(--divider);
+}
+
+/* inner wrapper que controla layout e padding */
+.card-body {
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+.card-header mat-icon {
+  color: var(--green-900);
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+}
+
+/* Chips del stack — usa .skill-chip de styles.css */
+.stack-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* .skill-chip viene de styles.css */
+
+/* Stats */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 14px 8px;
+  background: var(--surface-2);
+  border-radius: var(--radius-md);
+  text-align: center;
+}
+
+.stat-value {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--green-900);
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* Disponibilidad */
+.availability {
+  display: flex;
+  align-items: center;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--green-800);
+  background: var(--green-50);
+  border: 1px solid var(--green-100);
+  border-radius: var(--radius-full);
+  padding: 10px 18px;
+}
+
+/* .status-dot::before viene de styles.css */
