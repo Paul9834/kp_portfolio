@@ -1,0 +1,128 @@
+/* ============================================================
+   [feature-name].component.css
+   RULE: layout only here — colors, fonts, shadows, radii,
+   transitions always come from var(--token) in styles.css.
+   Never write a raw hex value, px radius, or ms duration here.
+   ============================================================ */
+
+/* ── Section wrapper ─────────────────────────────────────── */
+.section-name {
+  /* layout */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  /* spacing — use section utility from styles.css instead when possible */
+  padding-block: clamp(64px, 8vw, 120px);
+
+  /* surface token — never a raw color */
+  background: var(--bg);
+}
+
+/* ── Inner container ─────────────────────────────────────── */
+.section-name__inner {
+  width: 100%;
+  max-width: var(--container-max);
+  padding-inline: 24px;
+}
+
+/* ── Header block ────────────────────────────────────────── */
+/*
+  Use global utility classes directly in HTML — no CSS needed here:
+    .eyebrow        → small uppercase label above the title
+    .section-title  → main heading
+    .section-subtitle → supporting text
+    .divider-green  → decorative green bar
+*/
+
+/* ── Grid / list layout ──────────────────────────────────── */
+.section-name__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  margin-top: 48px;
+}
+
+/* ── Card / item ─────────────────────────────────────────── */
+/*
+  For a standard hover card use global .card class in HTML.
+  Only add component-specific layout below, never re-style colors.
+*/
+.section-name__item {
+  /* layout only */
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 28px;
+
+  /* tokens — no raw values */
+  background:    var(--surface);
+  border-radius: var(--radius-lg);
+  box-shadow:    var(--shadow-md);
+  border: 1px solid var(--divider);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.section-name__item:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+}
+
+/* ── Typography inside item ──────────────────────────────── */
+.section-name__item-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.section-name__item-desc {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* ── Accent / highlight ──────────────────────────────────── */
+/*
+  For colored text use global .gradient-text in HTML.
+  For chips use global .skill-chip in HTML.
+  For badges use global .badge-tag in HTML.
+*/
+.section-name__accent {
+  color: var(--green-900);
+  font-weight: 700;
+}
+
+/* ── Angular Material overrides (only if needed) ─────────── */
+/*
+  Prefer setting --mat-* CSS tokens on the parent element:
+    .section-name__item { --mat-divider-color: var(--divider); }
+  Never use ::ng-deep.
+*/
+
+/* ── Animations ──────────────────────────────────────────── */
+/*
+  Use global utility classes in HTML — no CSS needed here:
+    .reveal-hidden         → fade + slide up on scroll
+    .reveal-left           → fade + slide from left
+    .reveal-right          → fade + slide from right
+    .animate-fade-in-up    → immediate fade-in up
+    .delay-1 … .delay-6   → stagger children
+*/
+
+/* ── Responsive ──────────────────────────────────────────── */
+@media (min-width: 768px) {
+  .section-name__inner { padding-inline: 40px; }
+}
+
+@media (min-width: 992px) {
+  .section-name__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1280px) {
+  .section-name__inner  { padding-inline: 48px; }
+  .section-name__grid   { grid-template-columns: repeat(3, 1fr); }
+}
