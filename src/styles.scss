@@ -10,6 +10,16 @@
 //  2. Portfolio design tokens (Clean Tech Blue)
 // ============================================================
 :root {
+
+  --m3-easing-standard: cubic-bezier(0.2, 0, 0, 1);
+  --m3-easing-emphasized: cubic-bezier(0.3, 0, 0.05, 1);
+
+  /* Duraciones */
+  --m3-duration-short: 200ms;
+  --m3-duration-medium: 400ms;
+  --m3-duration-long: 700ms;
+
+
   --font-main: 'Poppins', 'Helvetica Neue', sans-serif;
 
   // ⚡ PALETA CLEAN TECH (CERO MORADOS) ⚡
