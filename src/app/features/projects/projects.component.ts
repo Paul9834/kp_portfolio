@@ -1,6 +1,13 @@
-import { Component, HostListener, AfterViewInit, Inject, PLATFORM_ID, NgZone } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
-import { CommonModule } from '@angular/common';
+import {
+  Component,
+  HostListener,
+  AfterViewInit,
+  OnDestroy,
+  Inject,
+  PLATFORM_ID,
+  NgZone
+} from '@angular/core';
+import { isPlatformBrowser, CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatChipsModule } from '@angular/material/chips';
@@ -32,61 +39,10 @@ interface Project {
   templateUrl: './projects.component.html',
   styleUrl: './project.component.scss'
 })
-export class ProjectsComponent implements AfterViewInit {
-
-  private isBrowser: boolean;
-
-  constructor(
-    @Inject(PLATFORM_ID) platformId: object,
-    private ngZone: NgZone
-  ) {
-    this.isBrowser = isPlatformBrowser(platformId);
-  }
-
-  ngAfterViewInit(): void {
-    if (!this.isBrowser) return; // ← guard SSR
-
-    const items = document.querySelectorAll<HTMLElement>('.animated-on-scroll');
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      {
-        threshold: 0.15,
-        rootMargin: '0px 0px -40px 0px'
-      }
-    );
-
-    items.forEach(item => observer.observe(item));
-  }
-
-  @HostListener('window:scroll')
-  onScroll(): void {
-    if (!this.isBrowser) return; // ← guard SSR
-
-    this.ngZone.runOutsideAngular(() => {
-      const wrappers = document.querySelectorAll<HTMLElement>('.parallax-wrapper');
-      wrappers.forEach(wrapper => {
-        const img = wrapper.querySelector<HTMLElement>('.parallax-image');
-        if (!img) return;
-
-        const rect = wrapper.getBoundingClientRect();
-        const viewH = window.innerHeight;
-
-        if (rect.bottom >= 0 && rect.top <= viewH) {
-          const progress = (viewH - rect.top) / (viewH + rect.height);
-          const offset = (progress - 0.5) * 40;
-          img.style.transform = `translateY(${offset}px)`;
-        }
-      });
-    });
-  }
+export class ProjectsComponent implements AfterViewInit, OnDestroy {
+  private readonly isBrowser: boolean;
+  private observer?: IntersectionObserver;
+  private ticking = false;
 
   projects: Project[] = [
     {
@@ -160,4 +116,98 @@ export class ProjectsComponent implements AfterViewInit {
       link: 'https://github.com/paul9834'
     }
   ];
+
+  constructor(
+    @Inject(PLATFORM_ID) platformId: object,
+    private ngZone: NgZone
+  ) {
+    this.isBrowser = isPlatformBrowser(platformId);
+  }
+
+  ngAfterViewInit(): void {
+    if (!this.isBrowser) return;
+
+    this.setupIntersectionObserver();
+    this.updateParallax();
+  }
+
+  ngOnDestroy(): void {
+    this.observer?.disconnect();
+  }
+
+  private setupIntersectionObserver(): void {
+    const items = document.querySelectorAll<HTMLElement>('.animated-on-scroll');
+
+    this.observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            this.observer?.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.15,
+        rootMargin: '0px 0px -40px 0px'
+      }
+    );
+
+    items.forEach((item) => this.observer?.observe(item));
+  }
+
+  @HostListener('window:scroll')
+  onScroll(): void {
+    if (!this.isBrowser || this.ticking) return;
+
+    this.ticking = true;
+
+    this.ngZone.runOutsideAngular(() => {
+      requestAnimationFrame(() => {
+        this.updateParallax();
+        this.ticking = false;
+      });
+    });
+  }
+
+  @HostListener('window:resize')
+  onResize(): void {
+    if (!this.isBrowser || this.ticking) return;
+
+    this.ticking = true;
+
+    this.ngZone.runOutsideAngular(() => {
+      requestAnimationFrame(() => {
+        this.updateParallax();
+        this.ticking = false;
+      });
+    });
+  }
+
+  private updateParallax(): void {
+    const wrappers = document.querySelectorAll<HTMLElement>('.parallax-wrapper');
+    const isMobile = window.innerWidth <= 768;
+    const disableParallaxOnMobile = true;
+
+    wrappers.forEach((wrapper) => {
+      const img = wrapper.querySelector<HTMLElement>('.parallax-image');
+      if (!img) return;
+
+      if (disableParallaxOnMobile && isMobile) {
+        img.style.transform = 'translateY(0)';
+        return;
+      }
+
+      const rect = wrapper.getBoundingClientRect();
+      const viewH = window.innerHeight;
+
+      if (rect.bottom < 0 || rect.top > viewH) return;
+
+      const progress = (viewH - rect.top) / (viewH + rect.height);
+      const intensity = isMobile ? 10 : 28;
+      const offset = (progress - 0.5) * intensity;
+
+      img.style.transform = `translateY(${offset}px)`;
+    });
+  }
 }
