@@ -1,19 +1,18 @@
 <nav class="navbar">
 
   <div class="nav-links desktop-only">
-    <a routerLink="/" fragment="about">About</a>
-    <a routerLink="/" fragment="projects">Projects</a>
-    <a routerLink="/" fragment="contact">Contact</a>
-  </div>
+    <a routerLink="/about">About</a>
+    <a routerLink="/">Projects</a>
+    <a routerLink="/contact">Contact</a> </div>
 
   <div class="mobile-only">
     <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Menu">
       <mat-icon>menu</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
-      <a mat-menu-item routerLink="/" fragment="about">About</a>
-      <a mat-menu-item routerLink="/" fragment="projects">Projects</a>
-      <a mat-menu-item routerLink="/" fragment="contact">Contact</a>
+      <a mat-menu-item routerLink="/about">About</a>
+      <a mat-menu-item routerLink="/">Projects</a>
+      <a mat-menu-item routerLink="/contact">Contact</a>
     </mat-menu>
   </div>
 

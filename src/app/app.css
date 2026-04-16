@@ -3,3 +3,11 @@ main {
   display: block;
   overflow-x: hidden;
 }
+
+.flag-counter {
+  display: flex;
+  justify-content: center;
+  padding: 84px 0 8px;
+  margin-bottom: 34px;
+  opacity: 0.2;
+}
