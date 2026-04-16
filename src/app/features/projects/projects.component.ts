@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, HostListener, AfterViewInit, Inject, PLATFORM_ID, NgZone } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
@@ -9,7 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 interface Project {
   title: string;
   role: string;
-  chronology: string; // Ejemplo: 'Jan 2023 - Present'
+  chronology: string;
   description: string;
   techStack: string[];
   image: string;
@@ -29,9 +30,64 @@ interface Project {
     MatButtonModule
   ],
   templateUrl: './projects.component.html',
-  styleUrl: './project.component.scss' // Asegúrate de corregir el nombre aquí
+  styleUrl: './project.component.scss'
 })
-export class ProjectsComponent {
+export class ProjectsComponent implements AfterViewInit {
+
+  private isBrowser: boolean;
+
+  constructor(
+    @Inject(PLATFORM_ID) platformId: object,
+    private ngZone: NgZone
+  ) {
+    this.isBrowser = isPlatformBrowser(platformId);
+  }
+
+  ngAfterViewInit(): void {
+    if (!this.isBrowser) return; // ← guard SSR
+
+    const items = document.querySelectorAll<HTMLElement>('.animated-on-scroll');
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.15,
+        rootMargin: '0px 0px -40px 0px'
+      }
+    );
+
+    items.forEach(item => observer.observe(item));
+  }
+
+  @HostListener('window:scroll')
+  onScroll(): void {
+    if (!this.isBrowser) return; // ← guard SSR
+
+    this.ngZone.runOutsideAngular(() => {
+      const wrappers = document.querySelectorAll<HTMLElement>('.parallax-wrapper');
+      wrappers.forEach(wrapper => {
+        const img = wrapper.querySelector<HTMLElement>('.parallax-image');
+        if (!img) return;
+
+        const rect = wrapper.getBoundingClientRect();
+        const viewH = window.innerHeight;
+
+        if (rect.bottom >= 0 && rect.top <= viewH) {
+          const progress = (viewH - rect.top) / (viewH + rect.height);
+          const offset = (progress - 0.5) * 40;
+          img.style.transform = `translateY(${offset}px)`;
+        }
+      });
+    });
+  }
+
   projects: Project[] = [
     {
       title: 'GoPoli Institutional App',
