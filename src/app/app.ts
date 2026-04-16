@@ -17,7 +17,7 @@ export class App implements OnInit {
   constructor(private meta: Meta, private title: Title) {}
 
   ngOnInit(): void {
-    this.title.setTitle('Kevin Montealegre | Senior Mobile Engineer');
+    this.title.setTitle('Paul Montealegre | Senior Mobile Engineer');
 
     this.meta.addTags([
       { name: 'description', content: 'Senior Mobile Engineer specialized in Kotlin, Swift and Clean Architecture. Systems Engineer based in Bogotá.' },
