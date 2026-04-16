@@ -1,25 +1,36 @@
-<section class="about-container">
+<section class="about-container" itemscope itemtype="https://schema.org/Person">
   <div class="about-content">
-    <h1 class="title">Sobre mí</h1>
-    <p class="description">
-      Hola, soy Kevin. Ingeniero de Sistemas y Senior Mobile Developer radicado en Bogotá.
-      Me especializo en construir aplicaciones nativas de alto rendimiento, asegurando código limpio, escalable y mantenible mediante principios de Clean Architecture y MVVM.
+
+    <header>
+      <h1 class="title" itemprop="name">
+        About me
+      </h1>
+    </header>
+
+    <p class="description" itemprop="description">
+      Senior Mobile Engineer based in Bogotá, Colombia, specialising in high-performance native mobile applications for Android and iOS.
+      Proven experience delivering scalable, secure and user-focused solutions across financial and enterprise environments, including products used by millions of users.
     </p>
 
-    <div class="skills-section">
-      <h2>Stack Principal</h2>
-      <div class="tech-badges">
-        <span class="badge">Kotlin</span>
-        <span class="badge">Jetpack Compose</span>
-        <span class="badge">Swift</span>
-        <span class="badge">SwiftUI</span>
-        <span class="badge">Spring Boot</span>
-      </div>
-    </div>
+    <p>
+      Strong expertise in Kotlin, Jetpack Compose, Swift and modern mobile architectures such as Clean Architecture and MVVM.
+      Background in backend development with Spring Boot, enabling efficient API design and seamless client–server integration.
+    </p>
+
+    <meta itemprop="jobTitle" content="Senior Mobile Engineer">
+    <meta itemprop="addressLocality" content="Bogotá">
+    <meta itemprop="addressCountry" content="Colombia">
+
   </div>
 
-  <div class="about-image">
+  <aside class="about-image">
     <div class="image-placeholder">
+      <img
+        src="https://i.imgur.com/v3Gxdlp.jpeg"
+        alt="Profile picture of Kevin Paul Montealegre Melo"
+        itemprop="image"
+        loading="lazy"
+      >
     </div>
-  </div>
+  </aside>
 </section>
