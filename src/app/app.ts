@@ -4,12 +4,13 @@ import { NavbarComponent } from './layout/navbar/navbar.component';
 import { HeroComponent } from './features/hero/hero.component';
 // 1. Importa la ruta real donde creaste tu projects.component.ts
 import { ProjectsComponent } from './features/projects/projects.component';
+import {WhatsappComponent} from './layout/whatsapp/whatsapp.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   // 2. Agrega ProjectsComponent al arreglo de imports
-  imports: [NavbarComponent, HeroComponent, ProjectsComponent],
+  imports: [NavbarComponent, HeroComponent, ProjectsComponent, WhatsappComponent],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
