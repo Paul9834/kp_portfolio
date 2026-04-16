@@ -189,23 +189,8 @@ export class ProjectsComponent implements AfterViewInit, OnDestroy {
 
   // Método optimizado para evitar saturación del hilo principal en móviles
   private updateParallax(): void {
-    const isMobile = window.innerWidth <= 768;
     const wrappers = document.querySelectorAll<HTMLElement>('.parallax-wrapper');
-
-    if (isMobile) {
-      // Si es móvil, limpiamos los estilos UNA sola vez y abortamos.
-      if (!this.isParallaxReset) {
-        wrappers.forEach((wrapper) => {
-          const img = wrapper.querySelector<HTMLElement>('.parallax-image');
-          if (img) img.style.transform = ''; // Quita el estilo en línea
-        });
-        this.isParallaxReset = true;
-      }
-      return; // Evita cálculos en cada evento de scroll
-    }
-
-    // Lógica para Desktop
-    this.isParallaxReset = false;
+    const isMobile = window.innerWidth <= 768;
     const viewH = window.innerHeight;
 
     wrappers.forEach((wrapper) => {
@@ -213,10 +198,13 @@ export class ProjectsComponent implements AfterViewInit, OnDestroy {
       if (!img) return;
 
       const rect = wrapper.getBoundingClientRect();
+
+      // Si la tarjeta no está visible en pantalla, abortamos el cálculo para ahorrar RAM
       if (rect.bottom < 0 || rect.top > viewH) return;
 
       const progress = (viewH - rect.top) / (viewH + rect.height);
-      const intensity = 28;
+      // Aplicamos intensidad 12 para móviles (suave) y 28 para desktop
+      const intensity = isMobile ? 12 : 28;
       const offset = (progress - 0.5) * intensity;
 
       img.style.transform = `translateY(${offset}px)`;
