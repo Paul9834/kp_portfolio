@@ -2,11 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { NavbarComponent } from './layout/navbar/navbar.component';
 import { HeroComponent } from './features/hero/hero.component';
+// 1. Importa la ruta real donde creaste tu projects.component.ts
+import { ProjectsComponent } from './features/projects/projects.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [NavbarComponent, HeroComponent],
+  // 2. Agrega ProjectsComponent al arreglo de imports
+  imports: [NavbarComponent, HeroComponent, ProjectsComponent],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
@@ -29,8 +32,10 @@ export class App implements OnInit {
       { property: 'og:title', content: 'Kevin Montealegre | Senior Mobile Engineer' },
       { property: 'og:description', content: 'Explore my portfolio as a Systems Engineer focusing on high-performance mobile development.' },
       { property: 'og:type', content: 'website' },
-      { property: 'og:url', content: 'https://tu-dominio.com' },
-      { property: 'og:image', content: 'https://tu-dominio.com/assets/og-image.jpg' }
+      // 3. Dominio real actualizado
+      { property: 'og:url', content: 'https://paul9834.com' },
+      // Si tienes una imagen para compartir, súbela a tu carpeta public/assets
+      { property: 'og:image', content: 'https://paul9834.com/assets/og-image.jpg' }
     ]);
   }
 }

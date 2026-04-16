@@ -1,0 +1,51 @@
+<section id="projects" class="projects-section">
+  <div class="container">
+    <h2 class="section-title">Career <span class="gradient-text">Journey</span></h2>
+
+    <div class="projects-grid">
+      @for (project of projects; track project.title) {
+        <mat-card class="project-card animated-on-scroll">
+          <div class="project-image-wrapper parallax-wrapper">
+            <img [src]="project.image" [alt]="project.title" class="parallax-image">
+          </div>
+
+          <div class="project-content">
+            <div class="card-header-text">
+              <h3 class="project-title">{{ project.title }}</h3>
+              <p class="role-chronology">{{ project.role }} • {{ project.chronology }}</p>
+            </div>
+
+            <p class="project-description">{{ project.description }}</p>
+
+            <mat-divider class="divider-spacer"></mat-divider>
+
+            <h4 class="section-subtitle">Key Achievements:</h4>
+            <ul class="achievements-list">
+              @for (achievement of project.achievements; track achievement) {
+                <li>
+                  <mat-icon class="check-icon">check_circle</mat-icon>
+                  <span>{{ achievement }}</span>
+                </li>
+              }
+            </ul>
+
+            <h4 class="section-subtitle">Tech Stack:</h4>
+            <div class="stack-grid">
+              @for (tech of project.techStack; track tech) {
+                <span class="skill-chip">{{ tech }}</span>
+              }
+            </div>
+
+            @if (project.link) {
+              <div class="action-container">
+                <a [href]="project.link" target="_blank" rel="noopener noreferrer" class="btn-primary view-btn">
+                  <mat-icon>rocket_launch</mat-icon> View Project
+                </a>
+              </div>
+            }
+          </div>
+        </mat-card>
+      }
+    </div>
+  </div>
+</section>

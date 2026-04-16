@@ -1,9 +1,9 @@
 <nav class="navbar">
 
   <div class="nav-links desktop-only">
-    <a href="#about">About</a>
-    <a href="#projects">Projects</a>
-    <a href="#contact">Contact</a>
+    <a routerLink="/" fragment="about">About</a>
+    <a routerLink="/" fragment="projects">Projects</a>
+    <a routerLink="/" fragment="contact">Contact</a>
   </div>
 
   <div class="mobile-only">
@@ -11,9 +11,9 @@
       <mat-icon>menu</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
-      <a mat-menu-item href="#about">About</a>
-      <a mat-menu-item href="#projects">Projects</a>
-      <a mat-menu-item href="#contact">Contact</a>
+      <a mat-menu-item routerLink="/" fragment="about">About</a>
+      <a mat-menu-item routerLink="/" fragment="projects">Projects</a>
+      <a mat-menu-item routerLink="/" fragment="contact">Contact</a>
     </mat-menu>
   </div>
 
