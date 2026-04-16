@@ -7,6 +7,13 @@
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 40px;
     margin-top: 48px;
+
+    // ✅ Mobile: una sola columna
+    @media (max-width: 480px) {
+      grid-template-columns: 1fr;
+      gap: 24px;
+      margin-top: 32px;
+    }
   }
 
   .project-card {
@@ -14,7 +21,8 @@
     border-radius: var(--radius-xl) !important;
     box-shadow: var(--shadow-md) !important;
     overflow: hidden;
-    transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1) !important;
 
     &:hover {
       transform: translateY(-8px);
@@ -22,11 +30,15 @@
     }
   }
 
-  // --- EFECTO DE PARALAJE ---
   .parallax-wrapper {
     position: relative;
     overflow: hidden;
-    height: 220px; // // Un poco más ajustado para no robar tanto espacio
+    height: 220px;
+
+    // ✅ Mobile: imagen un poco menos alta
+    @media (max-width: 480px) {
+      height: 180px;
+    }
 
     .parallax-image {
       width: 100%;
@@ -39,6 +51,11 @@
 
   .project-content {
     padding: 24px;
+
+    // ✅ Mobile: menos padding lateral
+    @media (max-width: 480px) {
+      padding: 16px;
+    }
   }
 
   .card-header-text {
@@ -49,6 +66,11 @@
       font-weight: 700;
       margin: 0 0 4px 0;
       color: var(--text-primary);
+
+      // ✅ Mobile: título más pequeño
+      @media (max-width: 480px) {
+        font-size: 1.2rem;
+      }
     }
 
     .role-chronology {
@@ -56,6 +78,10 @@
       font-size: 0.95rem;
       font-weight: 500;
       margin: 0;
+
+      @media (max-width: 480px) {
+        font-size: 0.85rem;
+      }
     }
   }
 
@@ -63,10 +89,18 @@
     color: var(--text-secondary);
     line-height: 1.6;
     margin-bottom: 0;
+
+    @media (max-width: 480px) {
+      font-size: 0.9rem;
+    }
   }
 
   .divider-spacer {
     margin: 24px 0;
+
+    @media (max-width: 480px) {
+      margin: 16px 0;
+    }
   }
 
   .section-subtitle {
@@ -74,12 +108,16 @@
     font-weight: 600;
     margin: 0 0 16px 0;
     color: var(--text-primary);
+
+    @media (max-width: 480px) {
+      font-size: 0.95rem;
+      margin-bottom: 12px;
+    }
   }
 
-  // // Corrección de la lista para que no se deforme
   .achievements-list {
     list-style: none;
-    padding: 0; // // Esto mata la sangría molesta por defecto
+    padding: 0;
     margin: 0 0 24px 0;
 
     li {
@@ -91,22 +129,33 @@
       margin-bottom: 14px;
       line-height: 1.5;
 
+      // ✅ Mobile: texto más compacto
+      @media (max-width: 480px) {
+        font-size: 0.85rem;
+        gap: 8px;
+        margin-bottom: 10px;
+      }
+
       .check-icon {
         color: #10b981;
         font-size: 20px;
         height: 20px;
         width: 20px;
-        flex-shrink: 0; // // Evita que el icono se aplaste si el texto ocupa 2 líneas
+        flex-shrink: 0;
       }
     }
   }
 
-  // // Chips estilo Hero
   .stack-grid {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
     margin-bottom: 24px;
+
+    @media (max-width: 480px) {
+      gap: 6px;
+      margin-bottom: 16px;
+    }
 
     .skill-chip {
       background: var(--surface-2);
@@ -116,6 +165,12 @@
       font-size: 0.8rem;
       font-weight: 500;
       border: 1px solid var(--divider);
+
+      // ✅ Mobile: chips más compactos
+      @media (max-width: 480px) {
+        padding: 4px 10px;
+        font-size: 0.75rem;
+      }
     }
   }
 
@@ -123,6 +178,16 @@
     display: flex;
     justify-content: flex-end;
     margin-top: 16px;
+
+    // ✅ Mobile: botón ocupa todo el ancho
+    @media (max-width: 480px) {
+      justify-content: stretch;
+
+      .view-btn {
+        width: 100%;
+        justify-content: center;
+      }
+    }
 
     .view-btn {
       display: inline-flex;
@@ -146,6 +211,11 @@
         box-shadow: var(--shadow-hover);
       }
     }
+  }
+
+  // ✅ Mobile: reducir padding de la sección
+  @media (max-width: 480px) {
+    padding: 48px 16px;
   }
 
   @keyframes fade-in-up {

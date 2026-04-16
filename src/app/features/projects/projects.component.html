@@ -6,7 +6,7 @@
       @for (project of projects; track project.title) {
         <mat-card class="project-card animated-on-scroll">
           <div class="project-image-wrapper parallax-wrapper">
-            <img [src]="project.image" [alt]="project.title" class="parallax-image">
+            <img [src]="project.image" [alt]="project.title" class="parallax-image" >
           </div>
 
           <div class="project-content">
@@ -36,13 +36,7 @@
               }
             </div>
 
-            @if (project.link) {
-              <div class="action-container">
-                <a [href]="project.link" target="_blank" rel="noopener noreferrer" class="btn-primary view-btn">
-                  <mat-icon>rocket_launch</mat-icon> View Project
-                </a>
-              </div>
-            }
+
           </div>
         </mat-card>
       }
