@@ -1,16 +1,27 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+
+// Angular Material Imports
 import { MatButtonModule } from '@angular/material/button';
-import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
-// 1. Importar la herramienta de rutas
-import { RouterLink } from '@angular/router';
+import { MatMenuModule } from '@angular/material/menu';
+
+import { ThemeService } from '../../core/services/theme.service';
 
 @Component({
   selector: 'app-navbar',
-  standalone: true,
-  // 2. Agregar RouterLink aquí
-  imports: [MatButtonModule, MatMenuModule, MatIconModule, RouterLink],
+  standalone: true, // 👈 CRUCIAL
+  imports: [
+    CommonModule,
+    RouterModule,
+    MatButtonModule,
+    MatIconModule,
+    MatMenuModule
+  ],
   templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.css'
+  styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent {}
+export class NavbarComponent {
+  themeService = inject(ThemeService);
+}

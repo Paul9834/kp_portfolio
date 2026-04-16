@@ -7,181 +7,157 @@
 @include mat.app-background();
 
 // ============================================================
-//  2. Portfolio design tokens (Clean Tech Blue)
+//  2. Portfolio design tokens
 // ============================================================
 :root {
-
   --m3-easing-standard: cubic-bezier(0.2, 0, 0, 1);
   --m3-easing-emphasized: cubic-bezier(0.3, 0, 0.05, 1);
-
-  /* Duraciones */
-  --m3-duration-short: 200ms;
-  --m3-duration-medium: 400ms;
   --m3-duration-long: 700ms;
-
 
   --font-main: 'Poppins', 'Helvetica Neue', sans-serif;
 
-  // ⚡ PALETA CLEAN TECH (CERO MORADOS) ⚡
-  --brand-dark:      #111827; // Gris casi negro puro (Textos fuertes)
-  --brand-gray:      #6B7280; // Gris medio (Textos secundarios)
-  --brand-light:     #F3F4F6; // Gris súper claro (Fondos de tarjetas)
+  // ⚡ PALETA CLEAN TECH
+  --brand-dark:      #111827;
+  --brand-gray:      #6B7280;
+  --brand-light:     #F3F4F6;
+  --accent-main:     #0062FF;
+  --accent-glow:     #004BD6;
 
-  --accent-main:     #0062FF; // Azul nativo (Acciones, botones)
-  --accent-glow:     #004BD6; // Azul oscuro (Para gradientes)
-
-  // Asignación de roles
   --text-primary:    var(--brand-dark);
   --text-secondary:  #374151;
   --text-muted:      var(--brand-gray);
   --text-inverse:    #FFFFFF;
 
   --bg:              #FFFFFF;
+  --bg-rgb:          255, 255, 255; // Para el blur de la Navbar
   --surface:         #FFFFFF;
   --surface-2:       var(--brand-light);
   --surface-3:       #E5E7EB;
   --divider:         #E5E7EB;
 
-  // Gradientes
   --grad-primary:    linear-gradient(135deg, var(--accent-main) 0%, var(--accent-glow) 100%);
   --grad-blob:       linear-gradient(135deg, rgba(0, 98, 255, 0.08) 0%, rgba(0, 75, 214, 0.05) 100%);
 
-  // Sombras (Neutras, sin color)
-  --shadow-xs:       0 2px 4px   rgba(17, 24, 39, 0.04);
-  --shadow-sm:       0 4px 8px   rgba(17, 24, 39, 0.06);
   --shadow-md:       0 8px 16px  rgba(17, 24, 39, 0.08);
   --shadow-lg:       0 16px 32px rgba(17, 24, 39, 0.1);
-  --shadow-hover:    0 24px 48px rgba(0, 98, 255, 0.15); // Brillo azul suave
+  --shadow-hover:    0 24px 48px rgba(0, 98, 255, 0.15);
 
-  --radius-xs: 4px; --radius-sm: 8px; --radius-md: 12px; --radius-lg: 20px; --radius-xl: 28px; --radius-full: 9999px;
-  --container-max: 1200px; --nav-height: 64px; --nav-height-mobile: 56px;
+  --radius-sm: 8px; --radius-md: 12px; --radius-lg: 20px; --radius-xl: 28px; --radius-full: 9999px;
+  --container-max: 1200px; --nav-height: 64px;
   --transition: 280ms cubic-bezier(0.16, 1, 0.3, 1);
 }
-
-@media (max-width: 768px) { :root { --nav-height: var(--nav-height-mobile); } }
 
 // ============================================================
 //  3. Angular Material M3 theme
 // ============================================================
 html {
   color-scheme: light;
+  @include mat.theme(( color: (primary: mat.$blue-palette, tertiary: mat.$red-palette), typography: 'Poppins, sans-serif', density: 0 ));
 
-  @include mat.theme((
-    color: (
-      primary:  mat.$blue-palette,
-      tertiary: mat.$red-palette, // ⚡ CAMBIE EL BLUE-GREY POR RED ACÁ
-    ),
-    typography: 'Poppins, sans-serif',
-    density: 0,
-  ));
+  --mat-sys-primary: var(--accent-main);
+  --mat-sys-on-primary: var(--text-inverse);
+  --mat-sys-surface: var(--bg);
+  --mat-sys-on-surface: var(--text-primary);
+  --mat-sys-background: var(--bg);
+  --mat-sys-on-background: var(--text-primary);
+  --mat-sys-outline-variant: var(--divider);
+}
 
-  // Y de aquí para abajo sigue todo normal...
+html.dark-theme {
+  color-scheme: dark;
+  @include mat.theme(( color: (primary: mat.$blue-palette, tertiary: mat.$red-palette, theme-type: dark), typography: 'Poppins, sans-serif', density: 0 ));
 
-  --mat-sys-primary:              var(--accent-main);
-  --mat-sys-on-primary:           var(--text-inverse);
-  --mat-sys-primary-container:    var(--brand-light);
-  --mat-sys-on-primary-container: var(--brand-dark);
+  --brand-dark:      #F9FAFB;
+  --brand-gray:      #9CA3AF;
+  --brand-light:     #1F2937;
 
-  --mat-sys-secondary:            var(--brand-dark);
-  --mat-sys-on-secondary:         var(--text-inverse);
+  --text-primary:    var(--brand-dark);
+  --text-secondary:  #D1D5DB;
+  --text-muted:      var(--brand-gray);
+  --text-inverse:    #111827;
 
-  --mat-sys-surface:              var(--bg);
-  --mat-sys-surface-variant:      var(--surface-3);
-  --mat-sys-on-surface:           var(--text-primary);
-  --mat-sys-on-surface-variant:   var(--text-secondary);
-  --mat-sys-background:           var(--bg);
-  --mat-sys-on-background:        var(--text-primary);
-  --mat-sys-outline-variant:      var(--divider);
+  --bg:              #0B0F19;
+  --bg-rgb:          11, 15, 25; // Fondo oscuro
+  --surface:         #111827;
+  --surface-2:       var(--brand-light);
+  --surface-3:       #374151;
+  --divider:         rgba(255, 255, 255, 0.15); // 👈 Borde visible para botones en Dark
 
-  --mat-sys-body-large-font: var(--font-main); --mat-sys-body-medium-font: var(--font-main); --mat-sys-body-small-font: var(--font-main);
-  --mat-sys-label-large-font: var(--font-main); --mat-sys-label-medium-font: var(--font-main); --mat-sys-label-small-font: var(--font-main);
-  --mat-sys-title-large-font: var(--font-main); --mat-sys-title-medium-font: var(--font-main); --mat-sys-title-small-font: var(--font-main);
-  --mat-sys-headline-large-font: var(--font-main); --mat-sys-headline-medium-font: var(--font-main); --mat-sys-headline-small-font: var(--font-main);
-  --mat-sys-display-large-font: var(--font-main); --mat-sys-display-medium-font: var(--font-main); --mat-sys-display-small-font: var(--font-main);
-
-  --mat-sys-corner-extra-small: var(--radius-sm); --mat-sys-corner-small: var(--radius-sm); --mat-sys-corner-medium: var(--radius-md);
-  --mat-sys-corner-large: var(--radius-lg); --mat-sys-corner-extra-large: var(--radius-xl); --mat-sys-corner-full: var(--radius-full);
+  --mat-sys-surface: var(--surface);
+  --mat-sys-on-surface: var(--text-primary);
+  --mat-sys-background: var(--bg);
+  --mat-sys-on-background: var(--text-primary);
+  --mat-sys-outline-variant: var(--divider);
+  --mat-sys-surface-container: var(--surface);
 }
 
 // ============================================================
-//  4. CSS Reset
+//  4. CSS Reset & Base
 // ============================================================
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-padding-top: calc(var(--nav-height) + 16px); text-size-adjust: none; }
 html, body {
   height: 100%; font-family: var(--font-main); font-weight: 300;
   background-color: var(--bg); color: var(--text-primary);
-  -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+  transition: background-color var(--transition), color var(--transition);
 }
-img, picture, video, canvas { display: block; max-width: 100%; }
-input, button, textarea, select { font-family: inherit; color: inherit; }
-h1, h2, h3, h4, h5, h6 { font-family: var(--font-main) !important; text-wrap: balance; line-height: 1.15; }
-.material-icons, mat-icon { font-family: 'Material Icons' !important; }
-::selection { background: rgba(0, 98, 255, 0.15); color: var(--accent-main); }
-:focus-visible { outline: 2px solid var(--brand-dark); outline-offset: 3px; border-radius: var(--radius-sm); }
-::-webkit-scrollbar { width: 8px; height: 8px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--divider); border-radius: var(--radius-full); }
-::-webkit-scrollbar-thumb:hover { background: var(--brand-gray); }
+h1, h2, h3, h4, h5, h6 { font-family: var(--font-main) !important; line-height: 1.15; }
 
 // ============================================================
 //  5. Global utility classes
 // ============================================================
-.mat-mdc-card { border-radius: var(--radius-lg) !important; box-shadow: var(--shadow-md) !important; }
-.mat-mdc-button, .mat-mdc-raised-button, .mat-mdc-flat-button, .mat-mdc-outlined-button {
-  border-radius: var(--radius-md) !important; font-weight: 500 !important; font-family: var(--font-main) !important; transition: all var(--transition) !important;
-}
-.mat-mdc-icon-button { border-radius: 50% !important; }
 .container { max-width: var(--container-max); margin: 0 auto; padding-inline: 24px; width: 100%; }
-@media (min-width: 768px) { .container { padding-inline: 40px; } }
-@media (min-width: 1280px) { .container { padding-inline: 48px; } }
-.section { padding-block: clamp(64px, 8vw, 120px); }
 
-// Texto
-.gradient-text {
-  background: var(--grad-primary);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; display: inline;
-}
-.badge-tag {
-  display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px;
-  background: rgba(0, 98, 255, 0.08); color: var(--accent-main);
-  border: 1px solid rgba(0, 98, 255, 0.15); border-radius: var(--radius-full);
-  font-size: 0.75rem; font-weight: 600; font-family: var(--font-main); letter-spacing: 0.1em; text-transform: uppercase;
-}
-
-// Botones
 .btn-primary {
   display: inline-flex; align-items: center; gap: 8px; padding: 14px 32px;
   background: var(--brand-dark); color: var(--text-inverse) !important;
-  border: none; border-radius: var(--radius-md); font-family: var(--font-main); font-size: 0.95rem; font-weight: 500;
-  cursor: pointer; text-decoration: none; box-shadow: 0 8px 24px rgba(17, 24, 39, 0.2); transition: all var(--transition);
+  border: none; border-radius: var(--radius-md); font-weight: 500;
+  cursor: pointer; text-decoration: none; box-shadow: 0 8px 24px rgba(17, 24, 39, 0.2);
+  transition: all var(--transition);
   &:hover { transform: translateY(-2px); box-shadow: 0 16px 32px rgba(17, 24, 39, 0.3); }
 }
+
 .btn-secondary {
   display: inline-flex; align-items: center; gap: 8px; padding: 13px 32px;
-  background: transparent; color: var(--brand-dark) !important;
-  border: 1px solid var(--divider); border-radius: var(--radius-md); font-family: var(--font-main); font-size: 0.95rem; font-weight: 500;
+  background: transparent; color: var(--text-primary) !important; // 👈 Cambiado para que use la variable correcta
+  border: 1px solid var(--divider); border-radius: var(--radius-md); font-weight: 500;
   cursor: pointer; text-decoration: none; transition: all var(--transition);
   &:hover { background: var(--surface-2); transform: translateY(-2px); }
 }
 
-// Componentes
 .card {
-  background: var(--surface); border-radius: var(--radius-lg); box-shadow: var(--shadow-md); border: 1px solid rgba(0, 0, 0, 0.04);
+  background: var(--surface); border-radius: var(--radius-lg); box-shadow: var(--shadow-md);
+  border: 1px solid var(--divider);
   transition: transform var(--transition), box-shadow var(--transition);
   &:hover { transform: translateY(-6px); box-shadow: var(--shadow-hover); }
 }
+
 .skill-chip {
   display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px;
   background: var(--surface-2); color: var(--text-primary);
-  border-radius: var(--radius-full); font-size: 0.8rem; font-weight: 400; font-family: var(--font-main);
-  border: 1px solid var(--divider); transition: all 180ms var(--ease-out);
+  border-radius: var(--radius-full); font-size: 0.8rem;
+  border: 1px solid var(--divider); transition: all 180ms ease-out;
   &:hover { background: var(--surface-3); transform: translateY(-2px); }
 }
+
+.gradient-text {
+  background: var(--grad-primary);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; display: inline;
+}
+
 .status-dot::before {
   content: ''; display: inline-block; width: 8px; height: 8px; border-radius: 50%;
-  background: #10B981; // Verde esmeralda para indicar disponibilidad
-  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+  background: #10B981; box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
   animation: pulse-dot 2s ease-in-out infinite; margin-right: 6px;
 }
 @keyframes pulse-dot { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.6; transform: scale(0.85); } }
+
+// Fix para Menús
+.cdk-overlay-pane {
+  --mat-menu-container-color: var(--surface);
+  --mat-menu-item-label-text-color: var(--text-primary);
+  .mat-mdc-menu-panel {
+    background-color: var(--surface) !important;
+    border: 1px solid var(--divider);
+    box-shadow: var(--shadow-lg) !important;
+  }
+}
