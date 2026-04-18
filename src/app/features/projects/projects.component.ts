@@ -23,6 +23,7 @@ interface Project {
   image: string;
   achievements: string[];
   link?: string;
+
 }
 
 @Component({
@@ -44,7 +45,6 @@ export class ProjectsComponent implements AfterViewInit, OnDestroy {
   private observer?: IntersectionObserver;
   private ticking = false;
 
-  // Variable agregada para controlar la limpieza del parallax en móviles
   private isParallaxReset = false;
 
   projects: Project[] = [
